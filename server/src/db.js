@@ -4,7 +4,7 @@ let MONGODB_URL =
     ? `mongodb+srv://wiseowl:${process.env.MONGO_DB_PASSWORD}@customerinformation.x9ecw.mongodb.net/SCRATCHANDWIN?retryWrites=true&w=majority`
     : "mongodb://localhost:27017/scratchandwin";
 
-module.exports = function connection() {
+module.exports = function connection(){
   try {
     mongoose.connect(
       MONGODB_URL,
@@ -14,9 +14,9 @@ module.exports = function connection() {
         useFindAndModify: false,
         useCreateIndex: true,
         autoIndex: true,
-      },
+      },   
       (error) => {
-        if (error) return new Error("Failed to connect to database");
+        if (error) console.log(error);
         console.log("connected to the database");
       }
     );

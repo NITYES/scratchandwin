@@ -26,6 +26,8 @@ const dispatch=useDispatch();
 
   useEffect(()=>{
 
+    console.log(process.env.REACT_APP_NODE_ENV)
+
     if(typeof window !=="undefined"){
 
       if(localStorage.getItem('token')){
