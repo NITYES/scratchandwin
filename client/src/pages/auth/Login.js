@@ -36,7 +36,6 @@ const Login = ({ history }) => {
 
     sign_up_btn.addEventListener("click", () => {
       container.classList.add("sign-up-mode");
-      console.log("sign up clicked");
     });
 
     sign_in_btn.addEventListener("click", () => {

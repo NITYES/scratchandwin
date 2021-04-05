@@ -8,7 +8,7 @@ const {check,validationResult}=require('express-validator');
 
     check('password').notEmpty()
     .isLength({min:6})
-    .withMessage('Password must be 6 Character long'),
+    .withMessage('Password must be six character long'),
 
    
 ];

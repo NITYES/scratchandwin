@@ -13,9 +13,9 @@ const {check,validationResult}=require('express-validator');
 
     check('purchasedItems')
    .isArray({min:1,max:30})
-    .withMessage('Limit Exceeded'),
+    .withMessage('Please Choose Purchased Item'),
 
-    check('totalPurchase').notEmpty().withMessage("Please Enter Amount").isNumeric().withMessage("Please enter amount").isLength({min:1,max:10}).withMessage("Limit Exceeded")
+    check('totalPurchase').notEmpty().withMessage("Please Enter Amount").isNumeric().withMessage("Please Enter amount").isLength({min:1,max:10}).withMessage("Please Enter A valid Amount")
 ];
 
 module.exports.isCustomerDataValidated=(req,res,next)=>{

@@ -1,6 +1,6 @@
 import React from "react";
 import Resizer from "react-image-file-resizer";
-import axios from "axios";
+import axios from '../../function/axios';
 import { Avatar } from "antd";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -29,7 +29,7 @@ const ImageUpload = ({ retailer, lottery, setLottery }) => {
           (uri) => {
             axios
               .post(
-                `${process.env.REACT_APP_API}/retailer/${retailer._id}/uploadimage`,
+                `/retailer/${retailer._id}/uploadimage`,
                 {
                   image: uri,
                 },
@@ -113,7 +113,7 @@ const ImageUpload = ({ retailer, lottery, setLottery }) => {
           (uri) => {
             axios
               .post(
-                `${process.env.REACT_APP_API}/retailer/${retailer._id}/uploadimage`,
+                `/retailer/${retailer._id}/uploadimage`,
                 {
                   image: uri,
                 },
@@ -154,7 +154,7 @@ const ImageUpload = ({ retailer, lottery, setLottery }) => {
           (uri) => {
             axios
               .post(
-                `${process.env.REACT_APP_API}/retailer/${retailer._id}/uploadimage`,
+                `/retailer/${retailer._id}/uploadimage`,
                 {
                   image: uri,
                 },

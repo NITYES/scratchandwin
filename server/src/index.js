@@ -33,8 +33,7 @@ app.use('/api',RetailerRoute)
 app.use(function(err,req,res,next){
 
      console.log(err.message)
-    console.log("i am error handler");
-    res.status(400).json({
+     res.status(400).json({
         error:"Bad request"
     })
 })

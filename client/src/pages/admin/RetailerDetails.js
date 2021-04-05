@@ -42,7 +42,7 @@ const RetailerDetails = ({ match, history }) => {
           setLottery(res.data);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          toast.error("Something Went Wrong")
         });
     });
   }, [retailerId,user.token]);

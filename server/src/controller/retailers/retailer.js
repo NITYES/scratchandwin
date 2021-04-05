@@ -9,7 +9,6 @@ const lottery = require("../../models/lottery");
 
 module.exports.getRetailersList = async (req, res) => {
   const result = await User.find({ role: "retailer" }, { password: 0 }).exec();
-  console.log(result);
   res.status(200).json(result);
 };
 
@@ -18,11 +17,11 @@ module.exports.getRetailerDetail = async (req, res) => {
     { _id: req.params.retailerId },
     { password: 0 }
   ).exec();
-  console.log(result);
   res.status(200).json(result);
 };
 
 module.exports.saveLottery = async (req, res) => {
+
   const { prize, startDate, endDate, retailerId } = req.body;
 
   //find the total product
@@ -41,7 +40,6 @@ module.exports.saveLottery = async (req, res) => {
   //check lottery already existed or not
   let lottery = await Lottery.findOne({ retailerId: retailerId }).exec();
 
-  console.log(req.body);
   if (lottery) {
     //if lottery exist  ,update the lottery
     Lottery.findOneAndUpdate(
@@ -70,6 +68,8 @@ module.exports.saveLottery = async (req, res) => {
       }
     });
   }
+
+
 };
 
 module.exports.getLotteryOfRetailer = async (req, res) => {
@@ -86,7 +86,6 @@ module.exports.getLotteryOfRetailer = async (req, res) => {
 
 module.exports.addCustomer = async (req, res) => {
   try {
-    console.log(req.body);
 
     const _newCustomer = new Customer(req.body);
 
@@ -129,16 +128,11 @@ module.exports.getLotteryPrize = async (req, res) => {
       remainingPrize = remainingPrize + singlePrize.remaining;
     });
 
-    console.log(remainingPrize);
 
     if (remainingPrize !== 0) {
-      console.log("i am remaining prize", remainingPrize);
       let frequency = _lottery.frequency;
-      console.log("frequency", frequency);
       let totalCustomerCount = await Customer.find({}).count();
-      console.log("total customer", totalCustomerCount);
       let modulous = totalCustomerCount % frequency;
-      console.log("modulus", modulous);
 
       if (modulous == 0) {
         //filter the remaining prize
@@ -219,15 +213,13 @@ module.exports.getLotteryPrize = async (req, res) => {
 module.exports.saveScratchPrize = (req, res) => {
   const { retailerId, customerId, scratchprize } = req.body;
   const randomPrize = scratchprize;
-  console.log("i am scratch ", req.body);
 
   let randomPrizeId = randomPrize.public_id;
-  console.log(randomPrizeId);
 
   const savePrizeCustomer = async () => {
     Customer.findOneAndUpdate(
       { _id: customerId },
-      { $set: { prize: randomPrize } },
+      { $set: { prize: randomPrize ,name:"Better Luck Next Time"} },
       { new: true }
     ).exec((error, saved) => {
       if (error) res.status(400).json({ error: "Sorry not saved" });
@@ -257,8 +249,6 @@ module.exports.saveScratchPrize = (req, res) => {
       ).exec((error, updatedprize) => {
         if (error) console.log(error);
         if (updatedprize) {
-          console.log("i am updated prize", updatedprize);
-          console.log("save prize to the customer");
 
           //update customer prize
           savePrizeCustomer();
