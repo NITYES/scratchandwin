@@ -51,3 +51,11 @@ export const authenticateAdmin=async (authtoken)=>{
 
 
 }
+
+
+export const generatePasswordResetLink=async (email)=>{
+
+    return await axios.post(`/request-forgot-password-link`,{email})
+
+
+}

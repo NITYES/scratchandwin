@@ -16,6 +16,7 @@ import RetailerDetails from '../src/pages/admin/RetailerDetails'
 import CustomerRegisteration from '../src/pages/retailer/CustomerRegisteration'
 import Scratch from './pages/retailer/Scratch';
 import PageNotFound from './pages/PageNotFound';
+import ForgotPassword from '../src/pages/auth/ForgotPassword'
 
 
 function App() {
@@ -61,6 +62,7 @@ console.clear();
 <Switch>
   
   <Redirect exact from="/" to="/login" />
+  <Route exact path="/forgot-password" component={ForgotPassword} />
   <Route  exact path="/login" component={Login} />
   <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
   <AdminRoute exact path="/admin/register" component={Register} />

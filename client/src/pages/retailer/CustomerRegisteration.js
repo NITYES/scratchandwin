@@ -4,10 +4,13 @@ import { Select } from "antd";
 import RetailerHeader from "../../components/nav/RetailerHeader";
 import { getRetailerLotteryInfo,addCustomer} from "../../function/retailer";
 import { toast } from "react-toastify";
+import { Spin, Space } from "antd";
+
 
 const { Option } = Select;
 
 const CustomerRegisteration = ({history}) => {
+  const[loading,setLoading]=useState(false)
   const [remaining, setRemaining] = useState(0);
   const [customerName, setCustomerName] = useState(null);
   const [customerMobile, setCustomerMobile] = useState(null);
@@ -25,11 +28,15 @@ const CustomerRegisteration = ({history}) => {
   const dispatch=useDispatch()
 
   useEffect(() => {
+    setLoading(true)
     getRetailerLotteryInfo(user._id, user.token).then((res) => {
       setRemaining(res.data);
+      setLoading(false)
       dispatch({
         type:"REMOVE_CUSTOMER"
       })
+    }).catch(err=>{
+      setLoading(false)
     });
   }, []);
 
@@ -93,14 +100,16 @@ console.clear();
     <div className="row align-items-center justify-content-center">
     <div className=" scratch-nav" style={{height:"20vh"}}>
     <RetailerHeader />
-
-    
-
-
     </div>
-    {remaining >0? (
+  {
+    loading?( <div className="scratch-container">
+    <Space size="middle">
+      <Spin size="large" />
+    </Space>
+  </div>):(<div className="col-md-12 col-lg-7 col-sm-11 ">
+        {remaining >0? (
           <div
-            className="col-md-12 col-lg-7 col-sm-11 "
+            
          style={{height:"80vh",background:`${user.color}`}}
           >
             <form onSubmit={handleSubmit} style={{background:"white",boxShadow:"2px 2px 10px black",borderRadius:"10px"}}>
@@ -164,11 +173,11 @@ console.clear();
           </div>
         </div>
       )}
-    </div>
-   
-      
-  
+    </div>)
+  }
 
+
+    </div>
 
     </div>
   );

@@ -131,10 +131,10 @@ module.exports.getLotteryPrize = async (req, res) => {
 
     if (remainingPrize !== 0) {
       let frequency = _lottery.frequency;
-      let totalCustomerCount = await Customer.find({}).count();
+      let totalCustomerCount = await Customer.find({retailerId:retailerId}).count();
       let modulous = totalCustomerCount % frequency;
 
-      if (modulous == 0) {
+      if (modulous === 0) {
         //filter the remaining prize
 
         const newFilteredRemainingPrize = await prize.filter(

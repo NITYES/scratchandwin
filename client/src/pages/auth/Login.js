@@ -3,6 +3,7 @@ import { useDispatch,useSelector} from "react-redux";
 import { loginUser } from "../../function/auth";
 import "./login.css";
 import { toast } from "react-toastify";
+import {Link} from 'react-router-dom'
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -106,7 +107,12 @@ if(err.response){
                 onChange={handlePasswordChange}
               />
             </div>
+            <br/>
             <input type="submit" value="Login" class="btn solid" />
+            <Link to="/forgot-password">
+            <a>Forgot Password</a>
+            </Link>
+          
           </form>
           {/* sign up form */}
           <form onSubmit={handlesignup} class="sign-up-form">

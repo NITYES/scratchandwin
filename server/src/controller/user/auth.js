@@ -1,7 +1,10 @@
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
+const crypto=require('crypto');
+const Token=require('../../models/token')
 const jwt = require("jsonwebtoken");
 const AuthStatus = require("../../models/authStatus");
+const sendEmail=require('../../middleware/email')
 
 const { updateLoggedStatus } = require("../../middleware/helperfunction");
 module.exports.createUser = async (req, res) => {
@@ -142,3 +145,46 @@ module.exports.logout = (req, res) => {
     }
   });
 };
+
+
+module.exports.resetPasswordRequest=async (req,res,next)=>{
+console.log(req.body)
+  const email=req.body.email;
+  const user=await User.findOne({email:"thewiseowl02@gmail.com"});
+  if(!user){
+    return res.status(401).json({
+      error:"User do not exist !"
+    })
+  }
+let token=await Token.findOne({userId:user._id});
+if(token)token.deleteOne();
+let resetToken=crypto.randomBytes(32).toString("hex");
+const hash=await bcrypt.hash(resetToken,Number(process.env.BCRYPT_SALT));
+
+await new Token({
+  userId:user._id,
+  token:hash,
+  createdAt:Date.now()
+}).save()
+
+const link = `${process.env.CLIENT_URL}/passwordReset?token=${resetToken}&id=${user._id}`;
+const htmlTemplate=`<html>
+<head>
+    <style>
+    </style>
+</head>
+<body>
+    <p>Hi ${user.name},</p>
+    <p>You requested to reset your password.</p>
+    <p> Please, click the link below to reset your password</p>
+    <a href="https://${link}">Reset Password</a>
+</body>
+</html>`
+await sendEmail(user.email,"Password Reset Request",htmlTemplate);
+return link;
+
+}
+
+module.exports.resetPassword=(req,res,next)=>{
+  
+}
