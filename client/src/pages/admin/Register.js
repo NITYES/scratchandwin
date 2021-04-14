@@ -48,14 +48,14 @@ const Register = ({ history }) => {
 
   return (
     <div className="container-fluid">
-      <div className="row" style={{ height: "100vh" }}>
+      <div className="row" style={{ height: "100%" }}>
         <div className="col-md-4 mb-3">
           <AdminNav history={history} />
         </div>
-        <div className="col-md-8 " style={{ background: "lightblue" }}>
+        <div className="col-md-8 " >
           <div className="row justify-content-center ">
             <div className="col-lg-8 col-md-12 col-sm -12">
-              <h3 className="m-5" style={{ textAlign: "center" }}>
+              <h3 className="m-2" style={{ textAlign: "center" }}>
                 Create New Retailers
               </h3>
 

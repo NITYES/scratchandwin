@@ -113,14 +113,15 @@ const RetailerDetails = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
-      <div className="row ">
-        <div className="col-md-4 col-sm-12 mb-3">
+      <div className="row " style={{height:"100%"}}>
+        <div className="col-md-4 col-sm-12 mb-3" >
           <AdminNav />
         </div>
         {loading ? (
           <div className="scratch-container">
             <Space size="middle">
               <Spin size="large" />
+              <div></div>
             </Space>
           </div>
         ) : (

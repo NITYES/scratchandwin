@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const schema=mongoose.Schema
-const bcrypt=require('bcrypt');
+const bcrypt=require('bcryptjs');
 const BCRYPT_SALT=process.env.BCRYPT_SALT
 
 const userSchema=new schema({

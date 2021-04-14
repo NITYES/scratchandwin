@@ -38,12 +38,13 @@ const Retailers = ({ history }) => {
         </div>
         <div
           className="col-md-8"
-          style={{ minHeight: "100vh", background: "lightblue" }}
+          style={{ minHeight: "100vh" }}
         >
           {loading ? (
             <div style={{ background: "white" }} className="scratch-container">
               <Space size="middle">
                 <Spin size="large" />
+                <div></div>
               </Space>
             </div>
           ) : (

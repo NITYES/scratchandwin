@@ -13,7 +13,7 @@ return (
                   <div className="col-md-4 col-sm-12 mb-3" >
                       <AdminNav history={history}/>
                   </div>
-                  <div className="col-md-8 col-sm-12 " style={{background:"lightblue",height:"100vh"}}>
+                  <div className="col-md-8 col-sm-12 " style={{height:"100vh"}}>
                      
                      <div className="row" style={{background:"white",textAlign:"center",padding:"20px"}}>
                          <h3>

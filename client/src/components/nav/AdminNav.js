@@ -23,7 +23,7 @@ const AdminNav = () => {
   return (
     <nav
       className="admin-nav"
-      style={{ background: "white", textAlign: "center" }}
+      style={{ background: "white", height:"100%",textAlign: "center",boxShadow:"0px 0px 10px  black" }}
     >
       <ul className="nav flex-column">
         <li key={1} className="nav-item" className="nav-link">
